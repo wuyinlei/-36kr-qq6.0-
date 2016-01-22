@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.wuyinlei.ui.R;
+import com.wuyinlei.activity.R;
 import com.nineoldandroids.view.ViewHelper;
 /**
  * 使用ViewRragHelper实现侧滑效果功能

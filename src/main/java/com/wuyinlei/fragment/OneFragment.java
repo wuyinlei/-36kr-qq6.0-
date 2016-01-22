@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.wuyinlei.ui.R;
+import com.wuyinlei.activity.R;
 
 
 public class OneFragment  extends Fragment {

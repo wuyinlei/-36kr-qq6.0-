@@ -1,0 +1,17 @@
+package com.wuyinlei.utils;
+
+public class ImageUtils {
+	/**
+	 * 进行图片地址截断  这边按照!号分隔
+	 * @param pUrl 
+	 * @return 
+	 */
+	public static String getCutImageUrl(String pUrl){
+        if(pUrl.contains("!")){
+			//如果这个字符串中包含了“！”，就截取返回前面的字符串
+        	String[] urlsStrings=pUrl.split("!");
+        	return urlsStrings[0];
+        }
+		return pUrl;
+	}
+}

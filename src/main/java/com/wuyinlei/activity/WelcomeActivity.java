@@ -1,4 +1,4 @@
-package com.wuyinlei.ui;
+package com.wuyinlei.activity;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
