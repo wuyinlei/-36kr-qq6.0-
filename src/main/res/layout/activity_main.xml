@@ -1,0 +1,59 @@
+<com.wuyinlei.widget.DragLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    >
+    <!--下层 左边的布局-->
+    <include layout="@layout/left_view_layout"/>
+    <!--上层 右边的主布局-->
+    <com.wuyinlei.widget.CustomRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        >
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical"
+            >
+        <RelativeLayout
+            android:id="@+id/rl_title"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:gravity="bottom"
+            android:background="@color/mask_tags_8"
+             >
+             <include layout="@layout/common_top_bar_layout"/>
+        </RelativeLayout>
+        <!--中间内容后面放入Fragment-->
+        <FrameLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            >
+          <!-- <fragment
+               android:id="@+id/main_info_fragment"
+               class="com.wuyinlei.fragment.OneFragment"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"/>-->
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                >
+                <Button
+                    android:id="@+id/btn"
+                    android:text="点击加载数据"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:id="@+id/iv_noimg"
+                    android:layout_gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="中间内容容器..."
+                    />
+            </FrameLayout>
+        </FrameLayout>
+        </LinearLayout>
+    </com.wuyinlei.widget.CustomRelativeLayout>
+</com.wuyinlei.widget.DragLayout>
