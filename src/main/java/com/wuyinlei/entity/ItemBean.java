@@ -9,10 +9,9 @@ public class ItemBean {
     public ItemBean() {
     }
 
-    public ItemBean(int img, String title, boolean isUpdate) {
+    public ItemBean(int img, String title) {
         this.img = img;
         this.title = title;
-        this.isUpdate = isUpdate;
     }
 
     public int getImg() {

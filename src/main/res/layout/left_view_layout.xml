@@ -86,8 +86,21 @@
 
     <!--底部功能条-->
     <include layout="@layout/left_view_bottom_layout"
-        android:id="@+id/bottom_view"
+             android:id="@+id/bottom_view"
         />
     <!--中间列表-->
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/bottom_view"
+        android:layout_below="@id/ll1"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="70dp"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@drawable/lv_click_selector"
+        android:divider="@null"
+        android:scrollbars="none"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
