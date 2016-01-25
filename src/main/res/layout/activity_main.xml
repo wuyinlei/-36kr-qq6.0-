@@ -47,7 +47,6 @@
 
                 </FrameLayout>
             </RelativeLayout>
-
         </LinearLayout>
     </com.wuyinlei.widget.CustomRelativeLayout>
 </com.wuyinlei.widget.DragLayout>

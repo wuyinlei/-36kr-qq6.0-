@@ -5,7 +5,9 @@
               android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/text_fragment"
         android:textSize="50dp"
+        android:textColor="@color/color_black"
         android:text="我是子fragment。。。。"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

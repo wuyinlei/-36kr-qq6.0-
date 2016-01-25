@@ -36,8 +36,9 @@ public class CustomRelativeLayout extends RelativeLayout {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (dl.getStatus() != DragLayout.Status.Close) {
+            //侧滑菜单如果是打开的状态，并且此时触摸已经抬起(点击的不是侧滑菜单区域)
             if (event.getAction() == MotionEvent.ACTION_UP) {
-                dl.close();
+                dl.close();//侧滑菜单隐藏
             }
             return true;
         }

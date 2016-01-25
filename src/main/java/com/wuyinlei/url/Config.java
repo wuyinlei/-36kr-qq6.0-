@@ -9,4 +9,6 @@ public class Config {
      */
     public static final String CRAWLER_URL = "http://www.36kr.com";
 
+    public  static final String BASE_TV_URL="http://tv.36kr.com/";
+
 }

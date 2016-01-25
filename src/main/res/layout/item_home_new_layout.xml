@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:layout_margin="10dp">
+
+        <com.wuyinlei.widget.RoundAngleImageView
+            android:id="@+id/item_news_img_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
+            android:src="@mipmap/defaultbg"
+            app:roundHeight="10dp"
+            app:roundWidth="10dp"/>
+
+        <TextView
+            android:id="@+id/item_news_tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/item_news_img_icon"
+            android:text="Tom"
+            android:textColor="@color/mask_tags_5"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/item_news_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/item_news_tv_name"
+            android:text="十分钟之前"
+            android:textColor="@color/mask_tags_5"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/item_news_tv_arrow"
+            android:layout_width="5dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="5dp"
+            android:background="@color/mask_tags_5"/>
+
+        <TextView
+            android:id="@+id/item_news_tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@+id/item_news_tv_arrow"
+            android:text="B轮后"
+            android:textColor="@color/mask_tags_5"
+            android:textSize="12dp"/>
+
+    </RelativeLayout>
+
+    <!--标题和图片-->
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:padding="10dp"
+            android:id="@+id/item_news_tv_title"
+            android:text="一周10篇 • 精选 | 寒潮已至，来点干货御个寒吧！"
+            android:layout_weight="1"
+            android:maxLines="4"
+            android:ellipsize="end"
+            android:textColor="@color/color_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <ImageView
+            android:id="@+id/item_news_image_content"
+            android:src="@mipmap/defaultbg"
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>

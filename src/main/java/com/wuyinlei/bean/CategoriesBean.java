@@ -1,9 +1,11 @@
 package com.wuyinlei.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by 若兰 on 2016/1/21.
  */
-public class CategoriesBean {
+public class CategoriesBean implements Serializable{
     private String title; // 分类Tab名称
     private String href; // 分类点击地址
     private String data_type; // 分类类型

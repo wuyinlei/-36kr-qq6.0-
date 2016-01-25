@@ -15,7 +15,12 @@ import com.wuyinlei.adapter.LeftItemAdapter;
 import com.wuyinlei.widget.DragLayout;
 
 public class MainActivity extends BaseActivity implements DefineView {
-	private DragLayout mDragLayout;
+	public DragLayout mDragLayout;
+
+	public DragLayout getDragLayout() {
+		return mDragLayout;
+	}
+
 	private ListView mListView;
 	private ImageView iv_icon, iv_bottom;
 	private LinearLayout ll_setting;
@@ -73,8 +78,6 @@ public class MainActivity extends BaseActivity implements DefineView {
 	@Override
 	public void bindData() {
 
-
-
 	}
 
 
@@ -95,5 +98,8 @@ public class MainActivity extends BaseActivity implements DefineView {
 			ViewHelper.setAlpha(iv_icon, 1 - percent);
 		}
 	}
+
+
+
 
 }

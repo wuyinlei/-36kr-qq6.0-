@@ -40,7 +40,7 @@ public class WelcomeActivity extends BaseActivity {
         //读取视频资源
         welcome_videoview.setVideoURI(Uri.parse("android.resource://" + this.getPackageName() + "/" + R.raw.kr36));
 
-        //播放视屏
+        //播放视频
         welcome_videoview.start();
 
         /**
@@ -90,5 +90,6 @@ public class WelcomeActivity extends BaseActivity {
         }
         return versionName;
     }
+
 
 }

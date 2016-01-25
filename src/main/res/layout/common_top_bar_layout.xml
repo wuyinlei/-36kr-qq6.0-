@@ -37,8 +37,8 @@
         app:roundHeight="17.5dp"/>
 -->
     <ImageView
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:scaleType="fitXY"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"

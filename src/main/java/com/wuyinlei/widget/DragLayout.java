@@ -60,7 +60,8 @@ public class DragLayout extends FrameLayout {
     class YScrollDetector extends SimpleOnGestureListener {
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float dx, float dy) {
-            return Math.abs(dy) <= Math.abs(dx);
+
+            return Math.abs(dy) <= Math.abs(dx) && isDrag !=false;
         }
     }
     /**
@@ -351,5 +352,17 @@ public class DragLayout extends FrameLayout {
             vg_main.layout(0, 0, width, height);
             dispatchDragEvent(0);
         }
+    }
+
+    private boolean isDrag=true;
+    public void setIsDrag(boolean isDrag) {
+        this.isDrag = isDrag;
+        if(isDrag){
+            dragHelper.abort();
+        }
+    }
+
+    public boolean isDrag() {
+        return isDrag;
     }
 }
