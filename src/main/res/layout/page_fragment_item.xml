@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+<android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_margin="6dp"
+    android:id="@+id/page_fragment_item_card"
+    app:cardElevation="4dp"
+    app:cardMaxElevation="4dp"
+    app:cardCornerRadius="1dp"
+    >
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+        <ImageView
+            android:id="@+id/page_fragment_item_img"
+            android:scaleType="fitXY"
+            android:src="@mipmap/item_logo"
+            android:layout_width="match_parent"
+            android:layout_height="120dp" />
+        <ImageView
+            android:src="@mipmap/tv"
+            android:id="@+id/play_tv"
+            android:layout_gravity="center"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+    </FrameLayout>
+    <!--标题文字-->
+    <RelativeLayout
+        android:layout_gravity="bottom"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:textColor="@color/color_black"
+            android:text="「氪 TV 测评」一加手机X：保守采用配置的同时，对工业设计体系做出一次革命"
+            android:id="@+id/page_fragment_item_title"
+            android:textSize="12sp"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+      <LinearLayout
+          android:layout_below="@id/page_fragment_item_title"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content">
+              <ImageView
+                  android:layout_marginTop="5dp"
+                  android:layout_marginLeft="5dp"
+                  android:src="@mipmap/clock"
+                  android:layout_width="20dp"
+                  android:layout_height="20dp" />
+              <TextView
+                  android:id="@+id/page_fragment_item_length"
+                  android:layout_marginTop="5dp"
+                  android:layout_marginLeft="5dp"
+                  android:textColor="@color/color_black"
+                  android:text="5分钟"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content" />
+            <ImageView
+
+                android:id="@+id/page_fragment_item_cal_img"
+                android:src="@mipmap/calender"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp" />
+            <TextView
+                android:layout_gravity="center"
+                android:id="@+id/page_fragment_item_time"
+                android:layout_marginTop="5dp"
+                android:text="1111111"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>
+</LinearLayout>

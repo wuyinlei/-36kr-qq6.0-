@@ -32,4 +32,6 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.6.0'
     compile 'com.squareup.okio:okio:1.6.0'
     compile project(':widgetutils')
+    compile project(':UniversalImageLoader')
+    compile 'com.android.support:cardview-v7:23.1.1'
 }

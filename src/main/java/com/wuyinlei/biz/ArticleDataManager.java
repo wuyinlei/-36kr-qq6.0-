@@ -1,10 +1,14 @@
 package com.wuyinlei.biz;
 
 import com.wuyinlei.bean.ArticleBean;
+import com.wuyinlei.bean.AuthorBean;
 import com.wuyinlei.bean.TagBean;
 import com.wuyinlei.utils.CTextUtils;
+import com.wuyinlei.utils.HttpRequest;
 import com.wuyinlei.utils.ImageUtils;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -51,6 +55,32 @@ public class ArticleDataManager {
         	}
         	articleBean.setTagBeans(tagBeans);
         }
+
+		//开始抓取用户信息
+		String author_Str= HttpRequest.sendPost("http://36kr.com/asynces/posts/author_info", "url_code=" + articleId);
+		AuthorBean bean=null;
+		try {
+			JSONObject authorObject=new JSONObject(author_Str);
+			String name=authorObject.getString("name");
+			String description=CTextUtils.replaceEmail(authorObject.getString("tagline"));
+			String avatar=ImageUtils.getCutImageUrl(authorObject.getString("avatar"));
+			String badge=authorObject.getString("role");
+			String article_total=authorObject.getString("posts_count");
+			String read_number=authorObject.getString("views_count");
+			String href="http:"+authorObject.getString("more_articles");
+			bean=new AuthorBean();
+			bean.setName(name);
+			bean.setDescription(description);
+			bean.setAvatar(avatar);
+			bean.setBadge(badge);
+			bean.setArticle_total(article_total);
+			bean.setRead_number(read_number);
+			bean.setHref(href);
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		articleBean.setAuthorBean(bean);
+
         //System.out.println("返回数据为:"+HttpRequest.sendPost("http://36kr.com/asynces/posts/author_info", "url_code="+articleId));
 		return articleBean;
 	}

@@ -19,6 +19,7 @@ public class CategoriesUtils {
     public static List<CategoriesBean> getCategoriedBeans(){
         List<CategoriesBean> categoriesBeans = new ArrayList<>();
         categoriesBeans.add(new CategoriesBean("最新文章","http://www.36kr.com/","全部"));
+        categoriesBeans.add(new CategoriesBean("氪TV","http://tv.36kr.com/","氪TV"));
         categoriesBeans.add(new CategoriesBean("早期项目","http://www.36kr.com/columns/starding","早期项目"));
         categoriesBeans.add(new CategoriesBean("B轮后","http://www.36kr.com/columns/bplus","B轮后"));
         categoriesBeans.add(new CategoriesBean("资本","http://www.36kr.com/columns/capital","资本"));

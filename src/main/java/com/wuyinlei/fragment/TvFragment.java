@@ -1,6 +1,5 @@
 package com.wuyinlei.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -15,15 +14,16 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.okhttp.Request;
 import com.wuyinlei.DefineView;
-import com.wuyinlei.activity.NewsDetailActivity;
 import com.wuyinlei.activity.R;
 import com.wuyinlei.adapter.HomeRecycleAdapter;
+import com.wuyinlei.adapter.TvAdapter;
 import com.wuyinlei.bean.ArticleTv;
 import com.wuyinlei.bean.CategoriesBean;
-import com.wuyinlei.bean.HomeNewsBean;
-import com.wuyinlei.biz.HomeNewsDataManager;
+import com.wuyinlei.biz.ArticleTvManager;
 import com.wuyinlei.http.OkHttpManager;
 import com.wuyinlei.url.Config;
 
@@ -31,11 +31,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.List;
 
+
 /**
- * Created by 若兰 on 2016/1/22.
+ * Created by 若兰 on 2016/1/28.
  * 一个懂得了编程乐趣的小白，希望自己
  * 能够在这个道路上走的很远，也希望自己学习到的
  * 知识可以帮助更多的人,分享就是学习的一种乐趣
@@ -43,37 +43,48 @@ import java.util.List;
  * csdn:http://blog.csdn.net/wuyinlei
  */
 
-public class PageFragment extends BaseFragment implements DefineView {
+public class TvFragment extends BaseFragment implements DefineView {
+
+
     private View mView;
 
-    private RecyclerView mRecyclerView;
-    //
-    private FrameLayout home_framlayuot;
-    //三个加载提示布局
-    private LinearLayout empty, error, loading;
-
     private static final String KEY = "EXTRA";
+
+    private List<ArticleTv> mArticleTvs;
 
     /**
      * 分类数据
      */
     private CategoriesBean mCategoriesBean;
 
+    private LayoutInflater mInflater;
+
     /**
      * RecycleView的adapter
      */
     private HomeRecycleAdapter mAdapter;
 
+
     /**
-     * 下拉刷新控件
+     * 下拉刷新组件
      */
-    private SwipeRefreshLayout mRefreshLayout;
-
-   // private
-    private ArticleTv mArticleTv;
+    private RecyclerView recycleview;
 
 
-    private LinearLayoutManager linearLayoutManager;
+    //
+    private FrameLayout home_framlayuot;
+    //三个加载提示布局
+    private LinearLayout empty, error, loading;
+
+    /**
+     * ImageLoader
+     */
+    private ImageLoader mImageLoader;
+
+    /**
+     * 图片加载设置
+     */
+    private DisplayImageOptions mOptions;
 
     //判断是否是最后一个item
     private int lastItem;
@@ -84,15 +95,19 @@ public class PageFragment extends BaseFragment implements DefineView {
     private boolean isLordMore = true;
 
 
-    /**
-     * 每个分类的新闻数据
-     */
-    private List<HomeNewsBean> mHomeNewsBeans;
+    private LinearLayoutManager linearLayoutManager;
 
-    public static PageFragment newInstance(CategoriesBean extra) {
+    /**
+     * 下拉刷新控件
+     */
+    private SwipeRefreshLayout mRefreshLayout;
+    private TvAdapter adapter;
+
+
+    public static TvFragment newInstance(CategoriesBean extra) {
         Bundle bundle = new Bundle();
         bundle.putSerializable(KEY, extra);
-        PageFragment fragment = new PageFragment();
+        TvFragment fragment = new TvFragment();
         fragment.setArguments(bundle);
         return fragment;
     }
@@ -106,12 +121,13 @@ public class PageFragment extends BaseFragment implements DefineView {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         if (mView == null) {
             mView = inflater.inflate(R.layout.page_fragment, container, false);
         }
+        mInflater = LayoutInflater.from(getActivity());
         initView();
         initValidata();
         initListener();
@@ -121,21 +137,16 @@ public class PageFragment extends BaseFragment implements DefineView {
 
     @Override
     public void initView() {
-
-        mRecyclerView = (RecyclerView) mView.findViewById(R.id.recycleview);
+        recycleview = (RecyclerView) mView.findViewById(R.id.recycleview);
         home_framlayuot = (FrameLayout) mView.findViewById(R.id.home_framlayout);
         empty = (LinearLayout) mView.findViewById(R.id.empty);
         error = (LinearLayout) mView.findViewById(R.id.error);
         loading = (LinearLayout) mView.findViewById(R.id.loading);
         mRefreshLayout = (SwipeRefreshLayout) mView.findViewById(R.id.swiperefreshlayout);
-        //mRecyclerView.setHasFixedSize(true);
-        // mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
     }
 
     @Override
     public void initValidata() {
-
         //设置下拉的时候的圈圈的颜色
         mRefreshLayout.setColorSchemeResources(
                 android.R.color.background_dark,
@@ -154,30 +165,40 @@ public class PageFragment extends BaseFragment implements DefineView {
 
         //设置进度条的偏移量
         mRefreshLayout.setProgressViewOffset(false, 0, 50);
-
-        mRecyclerView.setHasFixedSize(true);
+        recycleview.setHasFixedSize(true);
         linearLayoutManager = new LinearLayoutManager(getContext(), OrientationHelper.VERTICAL, false);
-        mRecyclerView.setLayoutManager(linearLayoutManager);
+        recycleview.setLayoutManager(linearLayoutManager);
 
-        //获取数据
-        OkHttpManager.getAsync(mCategoriesBean.getHref(), new OkHttpManager.DataCallBack() {
+
+        /**
+         * 刚开始加载数据的时候，设置等待页面
+         */
+      /*  recycleview.setVisibility(View.INVISIBLE);
+        home_framlayuot.setVisibility(View.VISIBLE);
+        loading.setVisibility(View.VISIBLE);
+        error.setVisibility(View.GONE);
+        empty.setVisibility(View.GONE);*/
+
+        OkHttpManager.getAsync(Config.BASE_TV_URL, new OkHttpManager.DataCallBack() {
             @Override
             public void requestFailure(Request request, IOException e) {
-                Log.d("PageFragment", "数据加载失败");
+                Log.d("TvFragment", "解析失败了");
             }
 
             @Override
             public void requestSuccess(String result) throws Exception {
-                //Log.d("PageFragment", "请求成功");
-
                 /**
                  * jsoup解析数据
                  */
                 Document document = Jsoup.parse(result, Config.CRAWLER_URL);
-                mHomeNewsBeans = new HomeNewsDataManager().getHomeBeans(document);
-                //Log.d("PageFragment", "mHomeNewsBeans.size():" + mHomeNewsBeans.size());
-
-                if (mHomeNewsBeans != null && mHomeNewsBeans != null) {
+                mArticleTvs = new ArticleTvManager().getArticleTvBeans(document);
+                Log.d("TvFragment", "mArticleTvs.size():" + mArticleTvs.size());
+                if (mArticleTvs != null && mArticleTvs.size() > 0) {
+                   /* recycleview.setVisibility(View.VISIBLE);
+                    home_framlayuot.setVisibility(View.GONE);
+                    loading.setVisibility(View.GONE);
+                    error.setVisibility(View.GONE);
+                    empty.setVisibility(View.GONE);*/
                     bindData();
                 }
             }
@@ -186,7 +207,6 @@ public class PageFragment extends BaseFragment implements DefineView {
 
     @Override
     public void initListener() {
-
         mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -207,7 +227,7 @@ public class PageFragment extends BaseFragment implements DefineView {
         /**
          *
          */
-        mRecyclerView.setOnScrollListener(new RecyclerView.OnScrollListener() {
+        recycleview.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -216,10 +236,7 @@ public class PageFragment extends BaseFragment implements DefineView {
                         isLordMore = false;
                         //构造下一页数据的地址
 
-                        String lordMoreUrl = mCategoriesBean.getHref()
-                                + "?b_url_code="
-                                + mHomeNewsBeans.get(mHomeNewsBeans.size() - 1).gettId()
-                                + "&d=next";
+                        String lordMoreUrl = "http://tv.36kr.com/video/get_more";
 
                         OkHttpManager.getAsync(lordMoreUrl, new OkHttpManager.DataCallBack() {
                             @Override
@@ -230,9 +247,8 @@ public class PageFragment extends BaseFragment implements DefineView {
                             @Override
                             public void requestSuccess(String result) throws Exception {
                                 Document document = Jsoup.parse(result, Config.CRAWLER_URL);
-
-                                List<HomeNewsBean> tempHomeNewsBeans = new HomeNewsDataManager().getHomeBeans(document);
-                                bindDataMore(tempHomeNewsBeans);
+                                List<ArticleTv> tempArticles = new ArticleTvManager().getArticleTvBeans(document);
+                                bindLordMore(tempArticles);
                                 isLordMore = true;
                             }
                         });
@@ -248,36 +264,29 @@ public class PageFragment extends BaseFragment implements DefineView {
         });
     }
 
-    /**
-     * 加载更多数据的方法
-     * @param tempHomeNewsBeans
-     */
-    private void bindDataMore(List<HomeNewsBean> tempHomeNewsBeans) {
-        mHomeNewsBeans.addAll(tempHomeNewsBeans);
-        mAdapter.notifyDataSetChanged();
+    private void bindLordMore(List<ArticleTv> articleTvs) {
+        mArticleTvs.addAll(articleTvs);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     public void bindData() {
-        mAdapter = new HomeRecycleAdapter(getContext(), 1);
+        adapter = new TvAdapter(mArticleTvs);
 
         /**
          * 不要忘记添加数据  要不然啥都没有
          */
-        mAdapter.setHomeNewsBeans(mHomeNewsBeans);
-        mRecyclerView.setAdapter(mAdapter);
+        //mAdapter.setArticleTvs(mArticleTvs);
+        recycleview.setAdapter(adapter);
 
-        mAdapter.setOnItemClickListener(new HomeRecycleAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new TvAdapter.OnItemClickListener() {
             @Override
             public void onClick(View v, Object o) {
-               // Toast.makeText(getContext(), o.toString(), Toast.LENGTH_SHORT).show();
-                HomeNewsBean bean = (HomeNewsBean) o;
-                Intent mIntent = new Intent(getActivity(),NewsDetailActivity.class);
-                mIntent.putExtra("titleUrl",bean.getHref());
-                mIntent.putExtra("titleId", bean.gettId());
-                mIntent.putExtra("news_item", (Serializable) o);
-                getActivity().startActivity(mIntent);
+                ArticleTv articleTv = (ArticleTv) o;
+                Toast.makeText(getContext(), articleTv.getTitle(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
+
 }

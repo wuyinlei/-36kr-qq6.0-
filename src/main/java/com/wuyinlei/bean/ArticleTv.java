@@ -1,7 +1,9 @@
 package com.wuyinlei.bean;
 
 
-public class ArticleTv {
+import java.io.Serializable;
+
+public class ArticleTv implements Serializable{
 	private String imgUrl;
 	private String tvUrl;
 	private String title;

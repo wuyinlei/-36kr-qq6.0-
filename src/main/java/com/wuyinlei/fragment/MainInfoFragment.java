@@ -59,8 +59,10 @@ public class MainInfoFragment extends Fragment implements DefineView ,OnPageChan
             //如果是第一个fragment，就设置给HomeFragment
             if (i == 0){
             fragment = HomeFragment.newInstance(sCategoriesBeans.get(i));
-            }else {
-                //如果不是第一个，就设置成PageFragment
+            }else if (i==1){
+               //加载氪TV
+                fragment = TvFragment.newInstance(sCategoriesBeans.get(i));
+            } else { //如果不是第一个，就设置成PageFragment
                 fragment = PageFragment.newInstance(sCategoriesBeans.get(i));
             }
             mFragments.add(fragment);
