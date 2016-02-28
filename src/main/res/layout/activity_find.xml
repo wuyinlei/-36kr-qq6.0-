@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wuyinlei.activity.FindActivity">
+
+    <include layout="@layout/find_top_bar_layout"/>
+
+
+    <!--轮传图-->
+    <include layout="@layout/gallery_indicator_layout"/>
+
+    <!--近期活动和寻找投资人-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/discovery_icon_investor"
+            android:text="@string/investor"/>
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/discovery_icon_item"
+            android:text="@string/investor_item"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/discovery_icon_emergence"
+            android:text="@string/investor_emergence"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_horizontal"
+            android:drawableTop="@mipmap/discovery_icon_explosive"
+            android:text="@string/investor_explosive"/>
+    </LinearLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/recent_kr_item"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/img_kr"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/discovery_icon_insight"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/img_kr"
+            android:gravity="center_vertical"
+            android:text="@string/kr_jinqi"
+            android:textColor="@color/color_tab_title"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_next"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/recent_activity_item"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/img_activity"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/find_icon_entrepreneurship_activity"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/img_activity"
+            android:gravity="center_vertical"
+            android:text="@string/activity_jinqi"
+            android:textColor="@color/color_tab_title"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_next"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/find_activity"
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+
+        <ImageView
+            android:id="@+id/img_investor"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/find_icon_entrepreneurship_investors"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/img_investor"
+            android:gravity="center_vertical"
+            android:text="@string/investor_find"
+            android:textColor="@color/color_tab_title"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_next"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/recent_applied_item"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/img_applied"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/find_icon_entrepreneurship_financing"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/img_applied"
+            android:gravity="center_vertical"
+            android:text="@string/spplied_jinqi"
+            android:textColor="@color/color_tab_title"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_next"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+
+    <RelativeLayout
+        android:id="@+id/recent_space_item"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/img_space"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/find_icon_entrepreneurship_signup"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/img_space"
+            android:gravity="center_vertical"
+            android:text="@string/space_jinqi"
+            android:textColor="@color/color_tab_title"
+            android:textSize="20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="15dp"
+            android:src="@mipmap/icon_next"/>
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_tab_title"
+        android:scaleType="fitXY"/>
+</LinearLayout>

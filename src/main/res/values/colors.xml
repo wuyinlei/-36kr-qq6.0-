@@ -2,8 +2,12 @@
 <resources>
     <color name="color_white">#FFFFFF</color>
     <color name="color_black">#000000</color>
+    <color name="popup_window">#444444</color>
     <color name="color_tab_title">#777777</color>
     <color name="color_transparent">#00000000</color>
+
+    <color name="color_head_title">#AAAAAA</color>
+
     <color name="color_lv_selector">#aaeeeeee</color>
 
     <!--标签背景颜色-->
@@ -18,7 +22,19 @@
     <color name="mask_tags_9">#9ec72c</color>
     <color name="mask_tags_10">#478de4</color>
     <color name="lv_click_color">#77AAAAAA</color>
-   <!-- <color name="mask_tags_11">#ffa319</color>
-    <color name="mask_tags_12">#f08945</color>
--->
+    <!-- <color name="mask_tags_11">#ffa319</color>
+     <color name="mask_tags_12">#f08945</color>
+      -->
+    <color name="topbar_Background_Day">#3F51B5</color>
+    <!--主页item背景色-->
+    <color name="main_item_background_Day">#FFFFFF</color>
+    <color name="background_Day">#FFFFFF</color>
+
+    <!--Toolbar背景  -->
+    <color name="topbar_Background_Night">#212121</color>
+    <!--主页item背景色-->
+    <color name="main_item_background_Night">#616161</color>
+
+    <color name="background_Night">#FF424242</color>
+
 </resources>

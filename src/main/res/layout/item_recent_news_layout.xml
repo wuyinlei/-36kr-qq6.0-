@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    android:id="@+id/item_tv_cardview"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="1dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginTop="1dp"
+    app:cardBackgroundColor="@color/color_white"
+    app:cardCornerRadius="1dp"
+    app:cardElevation="3dp"
+    app:cardMaxElevation="3dp"
+    >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/recent_item_img_logo"
+            android:layout_width="fill_parent"
+            android:layout_height="180dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:scaleType="fitXY"
+            android:src="@mipmap/defaultbg"/>
+
+        <TextView
+            android:id="@+id/recent_item_tv_title"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:maxLines="2"
+            android:text="创投探索之旅·上海站——股权投资:中产阶层最好的上升通道"
+            android:textColor="@color/color_tab_title"
+            android:textSize="16sp"/>
+        <!--地点-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@mipmap/metting_list_icon_address"/>
+
+            <TextView
+                android:id="@+id/recent_item_tv_location"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="上海上海市卢湾区大埔路15号·格林豪泰酒店"
+                android:textColor="@color/color_head_title"/>
+        </LinearLayout>
+        <!--报名状态和时间-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/recent_item_tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="23dp"
+                android:background="@drawable/icon_activity_jin"
+                android:gravity="center"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="报名中"
+                android:textColor="@color/color_white"/>
+
+            <TextView
+                android:id="@+id/recent_item_tv_timetext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="12月20日 14:00-17:00"
+                android:textColor="@color/color_head_title"/>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

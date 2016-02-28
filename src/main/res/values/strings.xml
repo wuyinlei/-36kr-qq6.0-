@@ -3,4 +3,30 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="activity_jinqi">近期活动</string>
+    <string name="investor_find">寻找投资人</string>
+    <string name="share">分享</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_text_content">
+        爱新闻是一个抓取某知名网址的数据，制作而成的新闻客户端，
+        包括首页新闻、详情、发现、寻找投资人等。。。
+        作者是若兰明月，一个懂得了编程乐趣的小白，希望自己能够在
+        这个道路上走的很远，也希望自己学习到的知识可以帮助更多的人,
+        分享就是学习的一种乐趣。
+    </string>
+
+    <string name="QQ">QQ:1069584784</string>
+    <string name="blog">csdn:http://blog.csdn.net/wuyinlei</string>
+    <string name="suggest">请输入您的宝贵建议和问题（必填）</string>
+    <string name="contact_way">联系方式:</string>
+    <string name="subbmit">提交</string>
+    <string name="spplied_jinqi">申请融资</string>
+    <string name="kr_jinqi">36氪指数</string>
+    <string name="space_jinqi">氪空间报名</string>
+    <string name="investor">投资人在看</string>
+    <string name="investor_item">项目动态</string>
+    <string name="investor_emergence">最新涌现</string>
+    <string name="investor_explosive">最具爆发力</string>
 </resources>

@@ -302,8 +302,10 @@ public class HomeFragment extends BaseFragment implements DefineView {
             home_list_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent mIntent = new Intent(getActivity(), NewsDetailActivity.class);
-                    mIntent.putExtra("news_item", homeBeans.get((int) id));
+                    Intent mIntent = new Intent(getActivity(),NewsDetailActivity.class);
+                    mIntent.putExtra("titleUrl", homeBeans.get(position).getHref());
+                    mIntent.putExtra("titleId", homeBeans.get(position).gettId());
+                    mIntent.putExtra("news_item", homeBeans.get(position));
                     getActivity().startActivity(mIntent);
                 }
             });

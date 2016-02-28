@@ -1,5 +1,7 @@
 package com.wuyinlei.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -18,6 +20,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.squareup.okhttp.Request;
 import com.wuyinlei.DefineView;
@@ -32,6 +35,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
+
+import cn.sharesdk.framework.ShareSDK;
+import cn.sharesdk.onekeyshare.OnekeyShare;
 
 public class NewsDetailActivity extends BaseActivity implements DefineView {
 
@@ -53,7 +59,11 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
     private String titleUrl,titleId;
 
     private ImageLoader mImageLoader;
+    private DisplayImageOptions mOptions;
+
     private HomeNewsBean mHomeNewsBean;
+
+    private String[] items = new String[]{"超大号字体", "大号字体", "正常字体", "小号字体", "超小号字体"};
 
     private Handler mHandler = new Handler(){
         @Override
@@ -62,6 +72,7 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
             bindData();
         }
     };
+    private WebSettings mWebSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,13 +108,9 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
         error=(LinearLayout)this.findViewById(R.id.error);
 
         btn_back = (Button) findViewById(R.id.btn_back);
-        btn_back.setOnClickListener(new MyOnClickListener());
         btn_font = (Button) findViewById(R.id.btn_font);
-        btn_font.setOnClickListener(new MyOnClickListener());
         btn_night = (Button) findViewById(R.id.btn_night);
-        btn_night.setOnClickListener(new MyOnClickListener());
         btn_share = (Button) findViewById(R.id.btn_share);
-        btn_share.setOnClickListener(new MyOnClickListener());
     }
 
     @Override
@@ -122,19 +129,19 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
 
         });
 
-        WebSettings webSettings = detailscontent.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        mWebSettings = detailscontent.getSettings();
+        mWebSettings.setJavaScriptEnabled(true);
 
-        webSettings.setDomStorageEnabled(true);  //开启DOM
+        mWebSettings.setDomStorageEnabled(true);  //开启DOM
 
-        webSettings.setDefaultTextEncodingName("utf-8"); //设置编码
+        mWebSettings.setDefaultTextEncodingName("utf-8"); //设置编码
         // // web页面处理
-        webSettings.setAllowFileAccess(true);// 支持文件流
+        mWebSettings.setAllowFileAccess(true);// 支持文件流
 
         //提高网页加载速度，暂时阻塞图片加载，然后网页加载好了，在进行加载图片
-        webSettings.setBlockNetworkImage(true);
+        mWebSettings.setBlockNetworkImage(true);
         //开启缓存机制
-        webSettings.setAppCacheEnabled(true);
+        mWebSettings.setAppCacheEnabled(true);
 
         OkHttpManager.getAsync(titleUrl, new OkHttpManager.DataCallBack() {
             @Override
@@ -180,6 +187,11 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
     public void bindData() {
 
         mImageLoader = ImageLoader.getInstance();
+        mOptions = new DisplayImageOptions.Builder()
+                .showImageOnLoading(R.mipmap.defaultbg)
+                .cacheOnDisk(true)   //设置保存在sdcard中
+                .cacheInMemory(true) //设置保存在内存当中
+                .build();
 
         if (mArticleBean != null){
             relativecontent.setVisibility(View.VISIBLE);
@@ -192,7 +204,7 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
             detailsname.setText(mHomeNewsBean.getAuthorBean().getName());
             detailstime.setText("发表于：" + mArticleBean.getDatetext());
             detailscontent.loadDataWithBaseURL(Config.CRAWLER_URL,mArticleBean.getContext(),"text/html","UTF-8","");
-            mImageLoader.displayImage(mArticleBean.getHeadImage(),detailsad);
+            mImageLoader.displayImage(mArticleBean.getHeadImage(),detailsad,mOptions);
         }
         else{
             relativecontent.setVisibility(View.GONE);
@@ -213,17 +225,112 @@ public class NewsDetailActivity extends BaseActivity implements DefineView {
                     NewsDetailActivity.this.finish();
                     break;
                 case R.id.btn_font:
+                    showChooseDialog();
                     Toast.makeText(NewsDetailActivity.this, "改变字体", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btn_night:
+                    changeTheme();
                     Toast.makeText(NewsDetailActivity.this, "调整黑白模式", Toast.LENGTH_SHORT).show();
                     break;
                 case R.id.btn_share:
-                    Toast.makeText(NewsDetailActivity.this, "分享", Toast.LENGTH_SHORT).show();
+                    shareComplete();
                     break;
             }
         }
+
+
     }
 
+    private void shareComplete() {
+        ShareSDK.initSDK(this);
+        OnekeyShare oks = new OnekeyShare();
+        //关闭sso授权
+        oks.disableSSOWhenAuthorize();
 
+// 分享时Notification的图标和文字  2.5.9以后的版本不调用此方法
+        //oks.setNotification(R.drawable.ic_launcher, getString(R.string.app_name));
+        // title标题，印象笔记、邮箱、信息、微信、人人网和QQ空间使用
+        oks.setTitle(getString(R.string.share));
+        // titleUrl是标题的网络链接，仅在人人网和QQ空间使用
+        oks.setTitleUrl("http://sharesdk.cn");
+        // text是分享文本，所有平台都需要这个字段
+        oks.setText("我是分享文本");
+        // imagePath是图片的本地路径，Linked-In以外的平台都支持此参数
+        oks.setImagePath("/sdcard/test.jpg");//确保SDcard下面存在此张图片
+        // url仅在微信（包括好友和朋友圈）中使用
+        oks.setUrl("http://sharesdk.cn");
+        // comment是我对这条分享的评论，仅在人人网和QQ空间使用
+        oks.setComment("我是测试评论文本");
+        // site是分享此内容的网站名称，仅在QQ空间使用
+        oks.setSite(getString(R.string.app_name));
+        // siteUrl是分享此内容的网站地址，仅在QQ空间使用
+        oks.setSiteUrl("http://sharesdk.cn");
+
+// 启动分享GUI
+        oks.show(this);
+    }
+
+    boolean flsg = true;
+    /**
+     * 主题切换
+     */
+    private void changeTheme() {
+        if (flsg){
+            flsg = false;
+            detailscontent.setBackgroundResource(R.color.color_tab_title);
+        } else {
+            detailscontent.setBackgroundResource(R.color.color_white);
+        }
+
+    }
+
+    private int mCurrentChooseItem;//记录当前选中的item   点击确定前
+
+    private int mCurrentItem = 2;//选中的item   点击确定后
+
+    /**
+     * 调整字体大小
+     */
+    private void showChooseDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("字体设置");
+        builder.setSingleChoiceItems(items, mCurrentItem, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                mCurrentChooseItem = which;
+            }
+        });
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (mCurrentChooseItem) {
+                    case 0:
+                        mWebSettings.setTextSize(WebSettings.TextSize.LARGEST);
+                        break;
+                    case 1:
+                        mWebSettings.setTextSize(WebSettings.TextSize.LARGER);
+                        break;
+                    case 2:
+                        mWebSettings.setTextSize(WebSettings.TextSize.NORMAL);
+                        break;
+                    case 3:
+                        mWebSettings.setTextSize(WebSettings.TextSize.SMALLER);
+                        break;
+                    case 4:
+                        mWebSettings.setTextSize(WebSettings.TextSize.SMALLEST);
+                        break;
+                }
+                mCurrentItem = mCurrentChooseItem;
+            }
+        });
+        builder.setNegativeButton("取消",null);
+        builder.show();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ShareSDK.stopSDK();
+    }
 }

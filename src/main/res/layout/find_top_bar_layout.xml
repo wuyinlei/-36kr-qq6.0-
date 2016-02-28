@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="@color/mask_tags_8"
+    android:id="@+id/rl_title"
+    android:gravity="bottom"
+    >
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="49dp">
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_marginLeft="5dp"
+            android:layout_centerVertical="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/btn_back_selector"/>
+        <TextView
+            android:id="@+id/top_bar_text"
+            android:layout_centerInParent="true"
+            android:text="发现页面"
+            android:textSize="18sp"
+            android:textColor="@color/color_white"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/btn_share"
+            android:visibility="gone"
+            android:src="@mipmap/news_icon_krtv_share"
+            android:layout_alignParentRight="true"
+            android:layout_width="40dp"
+            android:layout_marginRight="10dp"
+            android:layout_height="40dp"/>
+    </RelativeLayout>
+</RelativeLayout>

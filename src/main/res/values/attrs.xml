@@ -4,4 +4,14 @@
         <attr name="roundWidth" format="dimension" />
         <attr name="roundHeight" format="dimension" />
     </declare-styleable>
+
+    <attr name="button_bg" format="reference|color" />
+    <attr name="activity_bg" format="reference|color" />
+    <attr name="text_cl" format="reference|color" />
+    <attr name="main_menu_changetheme" format="string"/>
+
+    <attr name="myTheme" format="integer">
+        <enum name="day" value="0"/>
+        <enum name="night" value="1"/>
+    </attr>
 </resources>

@@ -14,10 +14,18 @@ import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 import com.nostra13.universalimageloader.utils.StorageUtils;
 
 import java.io.File;
+import java.util.HashMap;
 
 
 public class CNKApplication  extends Application{
     private static CNKApplication instance=null;
+
+    private HashMap<String,Object> tempMap = new HashMap<>();
+
+    public HashMap<String, Object> getTempMap() {
+        return tempMap;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -49,4 +57,7 @@ public class CNKApplication  extends Application{
                 .build();
                 ImageLoader.getInstance().init(configuration);
     }
+
+
+
 }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.wuyinlei.activity.InvestorDetailActivity">
+
+    <include layout="@layout/find_top_bar_layout"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.wuyinlei.widget.RoundAngleImageView
+                android:id="@+id/img_header"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="10dp"/>
+
+            <TextView
+                android:id="@+id/item_inverstor_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="5dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@mipmap/common_label_1"
+                android:text="名字"
+                android:textSize="22dp"/>
+
+            <TextView
+                android:id="@+id/investment_field_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="10dp"
+                android:singleLine="true"
+                android:text="光信资本副总裁，关注互联网医疗、电商、金融领域"/>
+
+            <TextView
+                android:id="@+id/focus_faeas_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:drawableLeft="@mipmap/common_icon_tag"
+                android:drawablePadding="5dp"
+                android:text="Pre-A轮 A轮 B轮 C轮"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/private_litter_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:drawableRight="@mipmap/news_toolbar_icon_comment"
+                    android:gravity="center_horizontal"
+                    android:text="私信"
+                    android:textSize="20dp"/>
+
+                <TextView
+                    android:id="@+id/attention_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@+id/private_litter_tv"
+                    android:drawableRight="@mipmap/news_toolbar_icon_comment"
+                    android:gravity="center_vertical"
+                    android:text="关注"
+                    android:textSize="20dp"/>
+            </RelativeLayout>
+
+            <WebView
+                android:layout_marginTop="10dp"
+                android:id="@+id/details_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            </WebView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
