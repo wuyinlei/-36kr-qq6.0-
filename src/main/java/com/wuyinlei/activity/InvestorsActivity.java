@@ -160,7 +160,7 @@ public class InvestorsActivity extends BaseActivity implements DefineView {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(InvestorsActivity.this,InvestorDetailActivity.class);
-                InvesatorData invesatorData = mInvesatorDatas.get(position);
+                InvesatorData invesatorData = mInvesatorDatas.get(position-1);
                 intent.putExtra("investor_url",invesatorData);
                 startActivity(intent);
             }

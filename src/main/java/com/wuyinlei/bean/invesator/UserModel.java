@@ -1,6 +1,8 @@
 package com.wuyinlei.bean.invesator;
 
-public class UserModel {
+import java.io.Serializable;
+
+public class UserModel implements Serializable{
     private String coinvestorType;
     private String id;
     private String nickName;

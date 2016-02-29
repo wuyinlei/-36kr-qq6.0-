@@ -1,9 +1,11 @@
 package com.wuyinlei.bean.invesator;
 
+import java.io.Serializable;
+
 /**
  * Created by 若兰 on 2016/2/20.
  */
-public class InvestCom {
+public class InvestCom implements Serializable{
     /**
      * financeEventId: 10783,
      * address1: 123,
